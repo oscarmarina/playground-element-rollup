@@ -6,13 +6,16 @@
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import copy from 'rollup-plugin-copy';
-import {importMetaAssets} from '@web/rollup-plugin-import-meta-assets';
 
 const copyConfig = {
   targets: [
     {
       src: 'node_modules/playground-elements/internal/typescript.js',
-      dest: 'dist/assets/internal/',
+      dest: 'dist/internal/',
+    },
+    {
+      src: 'node_modules/playground-elements/playground-typescript-worker.js',
+      dest: 'dist/',
     },
   ],
 };
@@ -23,5 +26,5 @@ export default {
     file: 'dist/playground-ide.js',
     format: 'esm',
   },
-  plugins: [resolve(), copy(copyConfig), importMetaAssets(), terser()],
+  plugins: [resolve(), copy(copyConfig), terser()],
 };
